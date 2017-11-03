@@ -17,7 +17,7 @@ $ composer require miamioh/behat-CSVFormatter
 
 Activate the extension by specifying its class in your `behat.yml`:
 
-```json
+```text
 # behat.yml
 default:
     suites:
@@ -37,3 +37,6 @@ default:
 ## Configuration
 * `filename` - filename
 * `outputDir` - dir to be created filename
+* `writeMethod` - Append or Overwrite possible write methods
+* `delimiter` - delimiter used to separate the fields of Output
+* `enclosure` - character used to denote the beginning and ending of the field 
