@@ -31,14 +31,8 @@ class CSVFormatter implements Formatter
       /** @var array */
       private $parameters = array();
 
-      /** @var string */
-      private $enclosure;
-
-      /** @var string */
-      private $delimiter;
-
-      /** @var string */
-      private $writeMethod;
+      /** @var Array */
+      private $options = array();
 
       /** @var ScenarioRun */
       private $currentScenario;
@@ -53,15 +47,18 @@ class CSVFormatter implements Formatter
        * @param string $outputDir
        * @param string $columnList
        */
-      public function __construct(string $filename, string $outputDir, array $columnList, string $delimiter, string $enclosure, string $writeMethod)
+      public function __construct(string $filename, string $outputDir, string $columnList, string $delimiter, string $enclosure, string $writeMethod)
       {
-          $this->printer        = new FileOutputPrinter($filename, $outputDir);
           $this->columnList     = explode(',',$columnList);
-          $this->delimiter      = $delimiter;
-          $this->enclosure      = $enclosure;
-          $this->writeMethod    = $writeMethod;
+          $this->options['delimiter']      = $delimiter;
+          $this->options['enclosure']      = $enclosure;
+          $this->options['writeMethod']    = substr(strtoupper($writeMethod),1,1);
+          $this->printer        = new FileOutputPrinter($filename, $outputDir, $this->options);
           $this->testcaseTimer  = new Timer();
 
+          if ($this->options['writeMethod'] ='O') {
+            $this->printer->writeHeaderRow($this->columnList);
+          }
       }
 
       /**
@@ -160,7 +157,7 @@ class CSVFormatter implements Formatter
           $this->currentScenario->setEndTime(new \DateTime());
           $this->currentScenario->setDuration($this->testcaseTimer);
           $this->currentScenario->setStatus($event->getTestResult()->getResultCode());
-          $this->printer->writeln($this->currentScenario->asArray());
+          $this->printer->write($this->currentScenario->asArray(),$this->options);
       }
 
 }

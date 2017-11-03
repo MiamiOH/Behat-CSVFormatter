@@ -21,16 +21,22 @@ class FileOutputPrinter implements PrinterInterface  {
        * @var string
        */
       private $filename;
+
+      /** @var array */
+      private $options;
+
+
       /**
        * __construct
        *
        * @param string $filename
        * @param string $outputDir
        */
-      public function __construct($filename, $outputDir)
+      public function __construct($filename, $outputDir,$options)
       {
           $this->filename = $filename;
           $this->setOutputPath($outputDir);
+          $this->options = $options;
       }
       /**
        * setOutputPath
@@ -117,11 +123,10 @@ class FileOutputPrinter implements PrinterInterface  {
        */
       public function write($messages, $append = false)
       {
-
-          $file = $this->getOutputPath() . DIRECTORY_SEPARATOR . $this->filename;
-          $handle = fopen($file,'a');
-          fputcsv ( $handle , $messages, $delimiter = ",", $enclosure = "'" );
-          fclose($handle);
+            $file = $this->getOutputPath() . DIRECTORY_SEPARATOR . $this->filename;
+            $handle = fopen($file,'a');
+            fputcsv ( $handle , $messages, $delimiter = ",", $enclosure = "'" );
+            fclose($handle);
       }
       /**
        * writeln
@@ -139,4 +144,17 @@ class FileOutputPrinter implements PrinterInterface  {
       public function flush()
       {
       }
+      /**
+       * Writes  message(s) at start of the output console.
+       *
+       * @param string|array $messages message or array of messages
+       */
+      public function writeHeaderRow($messages) {
+        $file = $this->getOutputPath() . DIRECTORY_SEPARATOR . $this->filename;
+        $handle = fopen($file,'w');
+        fputcsv ( $handle , $messages, $delimiter = ",", $enclosure = "'" );
+        fclose($handle);
+      }
+
+
 }
