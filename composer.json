@@ -1,0 +1,24 @@
+{
+    "name": "miamioh/behat-csv-formatter",
+    "description": "This will create a CSV formatter for Behat.",
+    "authors": [
+      {
+        "name": "Don Kidd",
+        "email": "dkidd@miamioh.edu"
+      }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "behat/behat": "^3.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.4"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "miamioh\\BehatCSVFormatter\\": "src/",
+            "Tests\\": "tests/"
+        }
+    }
+}
