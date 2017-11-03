@@ -125,7 +125,7 @@ class FileOutputPrinter implements PrinterInterface  {
       {
             $file = $this->getOutputPath() . DIRECTORY_SEPARATOR . $this->filename;
             $handle = fopen($file,'a');
-            fputcsv ( $handle , $messages, $delimiter = ",", $enclosure = "'" );
+            fputcsv ( $handle , $messages, $delimiter = $this->options['delimiter'], $enclosure = $this->options['enclosure'] );
             fclose($handle);
       }
       /**
@@ -152,7 +152,7 @@ class FileOutputPrinter implements PrinterInterface  {
       public function writeHeaderRow($messages) {
         $file = $this->getOutputPath() . DIRECTORY_SEPARATOR . $this->filename;
         $handle = fopen($file,'w');
-        fputcsv ( $handle , $messages, $delimiter = ",", $enclosure = "'" );
+        fputcsv ( $handle , $messages, $delimiter = $this->options['delimiter'], $enclosure = $this->options['enclosure'] );
         fclose($handle);
       }
 
