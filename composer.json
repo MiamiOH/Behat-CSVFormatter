@@ -12,7 +12,9 @@
         "behat/behat": "^3.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.4"
+        "phpunit/phpunit": "^6.4",
+        "symfony/process": ">2.3,<4.0"
+
     },
 
     "autoload": {
