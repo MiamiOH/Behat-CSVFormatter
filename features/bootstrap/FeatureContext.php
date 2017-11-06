@@ -50,8 +50,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
     public function copyResultingTemplateToProjectRoot()
     {
         shell_exec('rm -rf '.__DIR__.'/../../results');
-        mkdir(__DIR__.'/../../results');
-        mkdir(__DIR__.'/../../results/tests');
+        $this->createDirectory(__DIR__.'/../../results');
+        $this->createDirectory(__DIR__.'/../../results/tests');
         shell_exec('cp -R '.$this->workingDir.'/results/tests/* '.__DIR__.'/../../results/tests');
     }
 
@@ -64,8 +64,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
     {
         $dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'behat';
 
-        mkdir($dir . '/features/bootstrap/i18n', 0777, true);
-        mkdir($dir . '/junit');
+        $this->createDirectory($dir . '/features/bootstrap/i18n', 0777, true);
 
         $phpFinder = new PhpExecutableFinder();
         if (false === $php = $phpFinder->find()) {
@@ -350,7 +349,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
     {
         $newWorkingDir = $this->workingDir . '/' . $path;
         if (!file_exists($newWorkingDir)) {
-            mkdir($newWorkingDir, 0777, true);
+            $this->createDirectory($newWorkingDir, 0777, true);
         }
 
         $this->workingDir = $newWorkingDir;
