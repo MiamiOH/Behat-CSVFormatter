@@ -20,7 +20,7 @@ class ScenarioRunTests extends TestCase {
   public function setUp(): void
   {
       $this->scenario = new Scenario('Test Scenario');
-      $this->dateTimeFormat = 'Ymd g:i:s a (e)';
+      $this->dateTimeFormat = 'Ymd g:i:s a';
   }
 
   public function testCannotCreateScenarioRunWithoutScenario(): void {
@@ -45,6 +45,7 @@ class ScenarioRunTests extends TestCase {
     $this->scenarioRun = new ScenarioRun($this->scenario,$today);
     $resultsArray = [
       'Name'=>'Test Scenario',
+      'Tags'=>'',
       'StartTime'=>$today->format($this->dateTimeFormat),
       'EndTime'=>$today->format($this->dateTimeFormat),
       'Duration'=>'',

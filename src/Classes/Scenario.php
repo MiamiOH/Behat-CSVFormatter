@@ -24,7 +24,7 @@ final class Scenario
 
     public function asArray(): array
     {
-      return array('Name'=>$this->name);
+      return array('Name'=>$this->name,'Tags'=>$this->getTagsAsString());
     }
 
     public function setTags(array $tags) {
@@ -34,5 +34,9 @@ final class Scenario
     public function getTags() {
       return $this->tags;
     }
+    public function getTagsAsString() {
+      return implode(',',$this->getTags());
+    }
+
 
 }

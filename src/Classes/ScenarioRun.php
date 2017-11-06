@@ -33,7 +33,7 @@ final class ScenarioRun
       $this->startTime = $startTime;
       $this->endTime = $startTime;
       if (is_null($dateTimeFormat) ) {
-        $this->dateTimeFormat = 'Ymd g:i:s a (e)';
+        $this->dateTimeFormat = 'Ymd g:i:s a';
       } else {
         $this->dateTimeFormat = $dateTimeFormat;
       }

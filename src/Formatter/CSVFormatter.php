@@ -56,7 +56,7 @@ class CSVFormatter implements Formatter
           $this->printer        = new FileOutputPrinter($filename, $outputDir, $this->options);
           $this->testcaseTimer  = new Timer();
 
-          if ($this->options['writeMethod'] ='O') {
+          if ($this->options['writeMethod'] == 'O') {
             $this->printer->writeHeaderRow($this->columnList);
           }
       }
@@ -125,7 +125,9 @@ class CSVFormatter implements Formatter
       public function beforeScenario(ScenarioTested $event)
       {
         $scenario = new Scenario($event->getScenario()->getTitle());
+        $scenario->setTags(array_merge($event->getFeature()->getTags(),$event->getScenario()->getTags()));
         $this->currentScenario = new ScenarioRun($scenario,new \DateTime());
+
         $this->testcaseTimer->start();
       }
 
