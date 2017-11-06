@@ -1,4 +1,4 @@
-Feature: Twig Renderer
+Feature: CSV Output Test
 
 Background:
   Given a file named "behat.yml" with:
@@ -11,9 +11,6 @@ Background:
               filename: report.csv
               outputDir: %paths.base%/results/tests
               columnList: scenario.name,scenarioRun.startTime
-              writeMethod: Overwrite
-              enclosure: !
-              delimiter: ,
       suites:
           suite1:
               paths:    [ "%paths.base%/features/suite1" ]
@@ -44,6 +41,7 @@ Background:
 Scenario: Multiple Suites with multiple results
   Given a file named "features/suite1/suite_failing_with_passing.feature" with:
     """
+    @Feature1
     Feature: Suite failing with passing scenarios
       Scenario: Passing scenario
         Then I give a passing step
@@ -55,7 +53,9 @@ Scenario: Multiple Suites with multiple results
     """
   Given a file named "features/suite2/suite_passing.feature" with:
     """
+    @Feature2
     Feature: Suite passing
+    @Scenario2.1
       Scenario: Passing scenario
         Then I give a passing step
     """
@@ -63,13 +63,21 @@ Scenario: Multiple Suites with multiple results
   Then report file should exists
   And report file should contain:
     """
-    !Passing scenario!
+    'Passing scenario'
     """
   And report file should contain:
     """
-    !Passing and Failing steps!,!
+    'Passing and Failing steps'
     """
   And report file should contain:
     """
-    ,failed,!Then I give a failing step!,!
+    ,failed,'Then I give a failing step','
+    """
+  And report file should contain:
+    """
+    ,Feature1,
+    """
+  And report file should contain:
+    """
+    ,'Feature2,Scenario2.1'
     """
