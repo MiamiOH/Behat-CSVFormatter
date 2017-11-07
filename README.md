@@ -28,6 +28,7 @@ default:
             filename: report.csv
             outputDir: %paths.base%/build/tests
             writeMethod: Append
+            columnList: scenario.name,scenario.tags,scenarioRun.startTime,scenarioRun.endTime,scenarioRun.duration,scenarioRun.status,scenarioRun.StepName,scenarioRun.errorMessage
             
     ...
 ```
@@ -36,6 +37,7 @@ default:
 * `filename` - filename
 * `outputDir` - dir to be created filename
 * `writeMethod` - Append or Overwrite possible write methods
+* `columnList` - Currently used as the header column of CSV output
 (Optional Parameters) 
 * `delimiter` - delimiter used to separate the fields of Output (Default: , )
 * `enclosure` - character used to denote the beginning and ending of the field (Default: ' ) 
