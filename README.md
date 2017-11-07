@@ -27,8 +27,6 @@ default:
         miamioh\behat-CSVFormatter:
             filename: report.csv
             outputDir: %paths.base%/build/tests
-            delimiter: ,
-            enclosure: '
             writeMethod: Append
             
     ...
@@ -38,5 +36,6 @@ default:
 * `filename` - filename
 * `outputDir` - dir to be created filename
 * `writeMethod` - Append or Overwrite possible write methods
-* `delimiter` - delimiter used to separate the fields of Output
-* `enclosure` - character used to denote the beginning and ending of the field 
+(Optional Parameters) 
+* `delimiter` - delimiter used to separate the fields of Output (Default: , )
+* `enclosure` - character used to denote the beginning and ending of the field (Default: ' ) 
