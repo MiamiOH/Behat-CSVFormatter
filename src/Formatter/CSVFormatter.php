@@ -52,7 +52,7 @@ class CSVFormatter implements Formatter
           $this->columnList     = explode(',',$columnList);
           $this->options['delimiter']      = $delimiter;
           $this->options['enclosure']      = $enclosure;
-          $this->options['writeMethod']    = substr(strtoupper($writeMethod),1,1);
+          $this->options['writeMethod']    = substr(strtoupper($writeMethod),0,1);
           $this->printer        = new FileOutputPrinter($filename, $outputDir, $this->options);
           $this->testcaseTimer  = new Timer();
 
