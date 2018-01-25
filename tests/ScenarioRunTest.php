@@ -1,10 +1,6 @@
 <?php
 
-use miamioh\BehatCSVFormatter\Classes\ScenarioRun;
-use miamioh\BehatCSVFormatter\Classes\Scenario;
 use Behat\Behat\Tester\Result\StepResult as TestResult;
-
-
 use PHPUnit\Framework\TestCase;
 
 class ScenarioRunTests extends TestCase {

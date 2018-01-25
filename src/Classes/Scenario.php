@@ -1,42 +1,30 @@
 <?php
 
-namespace miamioh\BehatCSVFormatter\Classes;
+use Behat\Gherkin\Node\ScenarioNode;
 
-final class Scenario
+class Scenario extends ScenarioNode
 {
-    /** @var  string */
-    private $name;
 
-    /** @var  Array */
-    private $tags;
+  public function __construct(string $title, array $tags = [], array $steps = [], $keyword = null, $line = null) {
+    parent::__construct($title,$tags,$steps,$keyword,$line);
 
+  }
 
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-        $this->tags = [];
-    }
+  public function __toString(): string
+  {
+      return $this->getTitle();
+  }
+  public function asArray(): array
+  {
+    return array('Name'=>$this->getTitle(),'Tags'=>$this->getTagsAsString());
+  }
 
-    public function __toString(): string
-    {
-        return $this->name;
-    }
+  public function setTags(array $tags) {
+    $this->tags = $tags;
+  }
 
-    public function asArray(): array
-    {
-      return array('Name'=>$this->name,'Tags'=>$this->getTagsAsString());
-    }
-
-    public function setTags(array $tags) {
-      $this->tags = $tags;
-    }
-
-    public function getTags() {
-      return $this->tags;
-    }
-    public function getTagsAsString() {
-      return implode(',',$this->getTags());
-    }
-
+  public function getTagsAsString() {
+    return implode(',',$this->getTags());
+  }
 
 }

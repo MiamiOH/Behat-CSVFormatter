@@ -1,12 +1,10 @@
 <?php
 
-namespace miamioh\BehatCSVFormatter\Classes;
 
-use miamioh\BehatCSVFormatter\Classes\Scenario;
 use Behat\Behat\Tester\Result\StepResult as TestResult;
 
 
-final class ScenarioRun
+class ScenarioRun
 {
     /** @var  DateTime */
     private $startTime;
