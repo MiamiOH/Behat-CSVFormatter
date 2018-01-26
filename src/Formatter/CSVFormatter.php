@@ -13,8 +13,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use miamioh\BehatCSVFormatter\Printer\FileOutputPrinter;
 use Behat\Testwork\Counter\Timer;
-use miamioh\BehatCSVFormatter\Classes\Scenario;
-use miamioh\BehatCSVFormatter\Classes\ScenarioRun;
+use miamioh\Behat\Classes\Scenario;
+use miamioh\Behat\Classes\ScenarioRun;
 
 
 /**
@@ -124,8 +124,8 @@ class CSVFormatter implements Formatter
        */
       public function beforeScenario(ScenarioTested $event)
       {
-        $scenario = new Scenario($event->getScenario()->getTitle());
-        $scenario->setTags(array_merge($event->getFeature()->getTags(),$event->getScenario()->getTags()));
+        $tags = array_merge($event->getFeature()->getTags(),$event->getScenario()->getTags());
+        $scenario = new Scenario($event->getScenario()->getTitle(),$tags);
         $this->currentScenario = new ScenarioRun($scenario,new \DateTime());
 
         $this->testcaseTimer->start();

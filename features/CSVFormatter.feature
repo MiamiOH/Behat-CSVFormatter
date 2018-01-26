@@ -9,7 +9,7 @@ Background:
       extensions:
           miamioh\BehatCSVFormatter\BehatCSVFormatterExtension:
               filename: report.csv
-              outputDir: %paths.base%/results/tests
+              outputDir: '%paths.base%/results/tests'
               columnList: scenario.name,scenarioRun.startTime
       suites:
           suite1:

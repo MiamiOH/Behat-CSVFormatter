@@ -65,6 +65,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
         $dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'behat';
 
         $this->createDirectory($dir . '/features/bootstrap/i18n', 0777, true);
+        $this->createDirectory($dir . '/results/tests', 0777, true);
 
         $phpFinder = new PhpExecutableFinder();
         if (false === $php = $phpFinder->find()) {
@@ -74,6 +75,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
         $this->phpBin = $php;
         $this->process = new Process(null);
         $this->reportDir = $this->workingDir . '/results/tests/';
+
     }
 
     /**
@@ -155,6 +157,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
             $this->process->setEnv($env);
         }
 
+print_r ($this->process);
         $this->process->run();
 
         $this->output = $this->process->getOutput();

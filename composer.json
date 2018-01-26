@@ -1,6 +1,7 @@
 {
     "name": "miamioh/behat-csv-formatter",
     "description": "This will create a CSV formatter for Behat.",
+    "license": "GPL-3.0-or-later",
     "authors": [
       {
         "name": "Don Kidd",
@@ -9,7 +10,8 @@
     ],
     "require": {
         "php": ">=7.0",
-        "behat/behat": "^3.4"
+        "behat/behat": "^3.4",
+        "miamioh/behat-classes": ">=0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4",
