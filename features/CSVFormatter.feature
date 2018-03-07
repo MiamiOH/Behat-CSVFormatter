@@ -10,7 +10,7 @@ Background:
           miamioh\BehatCSVFormatter\BehatCSVFormatterExtension:
               filename: report.csv
               outputDir: '%paths.base%/results/tests'
-              columnList: scenario.name,scenarioRun.startTime
+              writeMethod: Overwrite
       suites:
           suite1:
               paths:    [ "%paths.base%/features/suite1" ]
@@ -81,3 +81,32 @@ Scenario: Multiple Suites with multiple results
     """
     ,'Feature2,Scenario2.1'
     """
+
+
+  Scenario: Adjust outputColumns
+    Given a file named "features/suite1/suite_failing_with_passing.feature" with:
+      """
+      @Feature1
+      Feature: Suite failing with passing scenarios
+        Scenario: Passing scenario
+          Then I give a passing step
+        Scenario: One Failing step
+          Then I give a failing step
+        Scenario: Passing and Failing steps
+          Then I give a passing step
+          Then I give a failing step
+      """
+    Given a file named "features/suite2/suite_passing.feature" with:
+      """
+      @Feature2
+      Feature: Suite passing
+      @Scenario2.1
+        Scenario: Passing scenario
+          Then I give a passing step
+      """
+    When I run "behat --no-colors"
+    Then report file should exists
+    And report file should contain:
+      """
+      suite2,'Passing scenario','Feature2,Scenario2.1'
+      """

@@ -27,18 +27,17 @@ default:
         miamioh\behat-CSVFormatter:
             filename: report.csv
             outputDir: %paths.base%/build/tests
-            columnList: scenario.name,scenario.tags,scenarioRun.startTime,scenarioRun.endTime,scenarioRun.duration,scenarioRun.status,scenarioRun.StepName,scenarioRun.errorMessage
-            
+
     ...
 ```
 
 ## Configuration
 * `filename` - filename
 * `outputDir` - dir to be created filename
-* `columnList` - Currently used as the header column of CSV output but does nothing else
 
-(Optional Parameters) 
-
+(Optional Parameters)
+* `columnList` - Used as the header column of CSV output if write Method is Overwrite, can also be used to limit the columns that will be displayed in the output.
+    (Default: Suite,Name,Tags,StartTime,EndTime,Duration,Status,StepName,ErrorMessage)
 * `writeMethod` - Append or Overwrite possible write methods (Default: Append )
 * `delimiter` - delimiter used to separate the fields of Output (Default: , )
-* `enclosure` - character used to denote the beginning and ending of the field (Default: ' ) 
+* `enclosure` - character used to denote the beginning and ending of the field (Default: ' )

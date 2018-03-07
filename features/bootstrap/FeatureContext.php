@@ -157,7 +157,6 @@ class FeatureContext implements Context, SnippetAcceptingContext
             $this->process->setEnv($env);
         }
 
-print_r ($this->process);
         $this->process->run();
 
         $this->output = $this->process->getOutput();

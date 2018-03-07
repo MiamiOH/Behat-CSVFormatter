@@ -61,7 +61,7 @@ class BehatCSVFormatterExtension implements Extension
 
       $builder->children()->scalarNode('filename')->defaultValue('test_report.xml');
       $builder->children()->scalarNode('outputDir')->defaultValue('build/tests');
-      $builder->children()->scalarNode('columnList')->defaultValue('ScenarioName,Status');
+      $builder->children()->scalarNode('columnList')->defaultValue('Suite,Name,Tags,StartTime,EndTime,Duration,Status,StepName,ErrorMessage');
       $builder->children()->scalarNode('delimiter')->defaultValue(',');
       $builder->children()->scalarNode('enclosure')->defaultValue("'");
       $builder->children()->scalarNode('writeMethod')->defaultValue('Append');

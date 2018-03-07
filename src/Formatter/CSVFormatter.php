@@ -15,6 +15,7 @@ use miamioh\BehatCSVFormatter\Printer\FileOutputPrinter;
 use Behat\Testwork\Counter\Timer;
 use miamioh\Behat\Classes\Scenario;
 use miamioh\Behat\Classes\ScenarioRun;
+use miamioh\Behat\Classes\Suite;
 
 
 /**
@@ -39,6 +40,9 @@ class CSVFormatter implements Formatter
 
       /** @var Array */
       private $columnList;
+
+      /** @var Suite */
+      private $suite;
 
       /**
        * __construct
@@ -125,9 +129,9 @@ class CSVFormatter implements Formatter
       public function beforeScenario(ScenarioTested $event)
       {
         $tags = array_merge($event->getFeature()->getTags(),$event->getScenario()->getTags());
-        $scenario = new Scenario($event->getScenario()->getTitle(),$tags);
+        $scenario = new Scenario($event->getScenario()->getTitle(),$tags,[],null,null);
         $this->currentScenario = new ScenarioRun($scenario,new \DateTime());
-
+        $this->suite = new Suite($event->getSuite()->getName());
         $this->testcaseTimer->start();
       }
 
@@ -159,7 +163,16 @@ class CSVFormatter implements Formatter
           $this->currentScenario->setEndTime(new \DateTime());
           $this->currentScenario->setDuration($this->testcaseTimer);
           $this->currentScenario->setStatus($event->getTestResult()->getResultCode());
-          $this->printer->write($this->currentScenario->asArray(),$this->options);
+          $this->printer->write($this->generateOutputColumns(),$this->options);
       }
 
+      private function generateOutputColumns() {
+        $possibleColumns = array_change_key_case(array_merge(['suite'=>$this->suite->getName()],$this->currentScenario->asArray()),CASE_UPPER);
+        $outputColumns = [];
+        foreach($this->columnList as $column) {
+          $outputColumns[] = $possibleColumns[strtoupper($column)];
+        }
+        return $outputColumns;
+        // $this->columnList();
+      }
 }
